@@ -91,24 +91,29 @@
 
 	        _this.state = { thirtyDays: [], hundredDays: [],
 	            viewData: [], active: "selection1" };
-
-	        fetch('https://fcctop100.herokuapp.com/api/fccusers/top/recent').then(function (response) {
-	            return response.json();
-	        }).then(function (data) {
-	            _this.setState({ thirtyDays: data, viewData: data });
-	        });
-
-	        fetch('https://fcctop100.herokuapp.com/api/fccusers/top/alltime').then(function (response) {
-	            return response.json();
-	        }).then(function (data) {
-	            _this.setState({ hundredDays: data });
-	        });
-
-	        _this.dataToggler = _this.dataToggler.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(App, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+
+	            fetch('https://fcctop100.herokuapp.com/api/fccusers/top/recent').then(function (response) {
+	                return response.json();
+	            }).then(function (data) {
+	                _this2.setState({ thirtyDays: data, viewData: data });
+	            });
+
+	            fetch('https://fcctop100.herokuapp.com/api/fccusers/top/alltime').then(function (response) {
+	                return response.json();
+	            }).then(function (data) {
+	                _this2.setState({ hundredDays: data });
+	            });
+
+	            this.dataToggler = this.dataToggler.bind(this);
+	        }
+	    }, {
 	        key: 'dataToggler',
 	        value: function dataToggler(id) {
 	            console.log(id);
@@ -123,7 +128,7 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this2 = this;
+	            var _this3 = this;
 
 	            return _react2.default.createElement(
 	                'div',
@@ -144,7 +149,7 @@
 	                    this.state.active === "selection2" && _react2.default.createElement(
 	                        'div',
 	                        { className: 'oneThird', style: { color: "blue", textDecoration: "underline" }, onClick: function onClick() {
-	                                return _this2.dataToggler(1);
+	                                return _this3.dataToggler(1);
 	                            } },
 	                        'Points In Past 30 days (sort\u21E9)'
 	                    ),
@@ -156,7 +161,7 @@
 	                    this.state.active === "selection1" && _react2.default.createElement(
 	                        'div',
 	                        { className: 'oneThird', style: { color: "blue", textDecoration: "underline" }, onClick: function onClick() {
-	                                return _this2.dataToggler(2);
+	                                return _this3.dataToggler(2);
 	                            } },
 	                        'All time points(sort\u21E9)'
 	                    ),

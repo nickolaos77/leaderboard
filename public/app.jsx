@@ -13,8 +13,9 @@ class App extends React.Component{
   constructor(props) {
    super(props);
       this.state = {thirtyDays:[], hundredDays:[], 
-                    viewData :[], active:"selection1"} ;
-      
+                    viewData :[], active:"selection1"} ;      
+  }
+  componentDidMount(){
       fetch('https://fcctop100.herokuapp.com/api/fccusers/top/recent').then ( response =>               response.json() ).then( data =>{
             this.setState({thirtyDays:data, viewData:data})
         }) 
@@ -25,8 +26,8 @@ class App extends React.Component{
         })    
       
       this.dataToggler = this.dataToggler.bind(this);    
-  }
-
+  }    
+     
 dataToggler(id){
     console.log(id);
     if (this.state.active === "selection1" && id==2) {
