@@ -90,13 +90,12 @@
 	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
 	        _this.state = { thirtyDays: [], hundredDays: [],
-	            viewData: [{ username: 'Loading...' }], active: "selection1" };
+	            viewData: [], active: "selection1" };
 
 	        fetch('https://fcctop100.herokuapp.com/api/fccusers/top/recent').then(function (response) {
 	            return response.json();
 	        }).then(function (data) {
 	            _this.setState({ thirtyDays: data, viewData: data });
-	            console.log(_this.state.thirtyDays[0]);
 	        });
 
 	        fetch('https://fcctop100.herokuapp.com/api/fccusers/top/alltime').then(function (response) {
@@ -147,7 +146,7 @@
 	                        { className: 'oneThird', style: { color: "blue", textDecoration: "underline" }, onClick: function onClick() {
 	                                return _this2.dataToggler(1);
 	                            } },
-	                        'Points In Past 30 days \u21E9'
+	                        'Points In Past 30 days (sort\u21E9)'
 	                    ),
 	                    this.state.active === "selection1" && _react2.default.createElement(
 	                        'div',
@@ -159,7 +158,7 @@
 	                        { className: 'oneThird', style: { color: "blue", textDecoration: "underline" }, onClick: function onClick() {
 	                                return _this2.dataToggler(2);
 	                            } },
-	                        'All time points'
+	                        'All time points(sort\u21E9)'
 	                    ),
 	                    this.state.active === "selection2" && _react2.default.createElement(
 	                        'div',
@@ -23727,11 +23726,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var CamperList = function CamperList(props) {
-	    console.log("Inside camper list");
-	    console.log(props);
 
 	    var campers = props.campers.viewData.map(function (obj, index) {
-	        //console.log(obj);
 	        return _react2.default.createElement(_camper2.default, { key: index, index: index + 1, camper: obj });
 	    });
 
@@ -23791,7 +23787,6 @@
 	        )
 	    );
 	};
-
 	exports.default = Camper;
 
 /***/ }
